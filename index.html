@@ -20,17 +20,17 @@ h1 { text-align:center; margin-bottom:15px; letter-spacing:1px; }
 /* Dinamis */
 .uniforms { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:14px; margin-top:12px; }
 .uniform { border:1px solid rgba(255,255,255,.35); border-radius:12px; overflow:hidden; text-align:center; background: rgba(0,0,0,.45); padding:6px; }
-.uniform img { width:100%; height:140px; object-fit:cover; }
 .uniform span { display:block; padding:8px; font-size:13px; opacity:.9; }
-.eksul-list, .peraturan-list { display:flex; flex-wrap: wrap; gap:10px; margin-top:6px; }
-.eksul-list input, .peraturan-list input { padding:8px; border-radius:12px; border:1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.55); color:#fff; margin-bottom:8px; flex:1; }
+.eksul-list, .peraturan-list, .syarat-list { display:flex; flex-wrap: wrap; gap:10px; margin-top:6px; }
+.eksul-list input, .peraturan-list input, .syarat-list input { padding:8px; border-radius:12px; border:1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.55); color:#fff; margin-bottom:8px; flex:1; }
+small { display:block; margin-top:6px; opacity:.7; font-size:13px; }
 </style>
 </head>
 <body>
 
 <div class="container">
   <h1>Form Pengisian Data Website Pendaftaran Sekolah</h1>
-  <div class="subtitle">Mohon isi data dengan lengkap, data akan langsung masuk ke website sekolah</div>
+  <div class="subtitle">Mohon isi data dengan lengkap, data akan langsung masuk ke WhatsApp sekolah</div>
 
   <form id="formSekolah">
 
@@ -71,7 +71,8 @@ h1 { text-align:center; margin-bottom:15px; letter-spacing:1px; }
       <div class="peraturan-list" id="peraturanContainer">
         <input type="text" name="peraturan[]" placeholder="Contoh: Datang tepat waktu">
       </div>
-      <button type="button" id="tambahPeraturan" class="btn" style="margin-top:10px;">Tambah Peraturan</button>
+      <button type="button" id="tambahPeraturan" class="btn">Tambah Peraturan</button>
+      <small>Jika ada foto atau dokumen tambahan peraturan, kirim langsung via WhatsApp.</small>
     </div>
 
     <!-- Ekstrakurikuler -->
@@ -80,7 +81,8 @@ h1 { text-align:center; margin-bottom:15px; letter-spacing:1px; }
       <div class="eksul-list" id="eksulContainer">
         <input type="text" name="ekskul[]" placeholder="Contoh: Pramuka">
       </div>
-      <button type="button" id="tambahEksul" class="btn" style="margin-top:10px;">Tambah Ekskul</button>
+      <button type="button" id="tambahEksul" class="btn">Tambah Ekskul</button>
+      <small>Jika ada dokumen atau foto tambahan, kirim via WhatsApp.</small>
     </div>
 
     <!-- Seragam -->
@@ -89,19 +91,20 @@ h1 { text-align:center; margin-bottom:15px; letter-spacing:1px; }
       <div id="seragamContainer">
         <div class="uniform">
           <input type="text" name="seragamNama[]" placeholder="Nama Seragam">
-          <input type="file" name="seragamFoto[]" accept="image/*">
         </div>
       </div>
-      <button type="button" id="tambahSeragam" class="btn" style="margin-top:10px;">Tambah Seragam</button>
+      <button type="button" id="tambahSeragam" class="btn">Tambah Seragam</button>
+      <small>Jika ada foto seragam, kirim langsung via WhatsApp setelah submit form.</small>
     </div>
 
     <!-- Syarat Pendaftaran -->
     <div class="form-group">
       <label>Syarat Pendaftaran :</label>
-      <div id="syaratContainer">
+      <div class="syarat-list" id="syaratContainer">
         <input type="text" name="syarat[]" placeholder="Contoh: Fotokopi KK">
       </div>
-      <button type="button" id="tambahSyarat" class="btn" style="margin-top:10px;">Tambah Syarat</button>
+      <button type="button" id="tambahSyarat" class="btn">Tambah Syarat</button>
+      <small>Jika ada dokumen tambahan, kirim via WhatsApp.</small>
     </div>
 
     <div class="form-group">
@@ -119,14 +122,13 @@ const form = document.getElementById('formSekolah');
 
 // Tambah Dinamis
 document.getElementById('tambahEksul').addEventListener('click',()=>{
-  const input = document.createElement('input');
-  input.type='text'; input.name='ekskul[]'; input.placeholder='Contoh: Futsal'; input.style.marginBottom='8px';
+  const input=document.createElement('input'); input.type='text'; input.name='ekskul[]'; input.placeholder='Contoh: Futsal'; input.style.marginBottom='8px';
   document.getElementById('eksulContainer').appendChild(input);
 });
 
 document.getElementById('tambahSeragam').addEventListener('click',()=>{
   const div=document.createElement('div'); div.className='uniform';
-  div.innerHTML=`<input type="text" name="seragamNama[]" placeholder="Nama Seragam"><input type="file" name="seragamFoto[]" accept="image/*">`;
+  div.innerHTML=`<input type="text" name="seragamNama[]" placeholder="Nama Seragam">`;
   document.getElementById('seragamContainer').appendChild(div);
 });
 
@@ -140,7 +142,7 @@ document.getElementById('tambahPeraturan').addEventListener('click',()=>{
   document.getElementById('peraturanContainer').appendChild(input);
 });
 
-// Submit ke WhatsApp
+// Submit ke WhatsApp (hanya teks)
 form.addEventListener('submit',function(e){
   e.preventDefault();
   const data=new FormData(form);
