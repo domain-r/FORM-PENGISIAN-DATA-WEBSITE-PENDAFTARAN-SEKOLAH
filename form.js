@@ -55,10 +55,10 @@ form.addEventListener('submit', function(e){
   });
 
   // Nomor WA pendaftaran ke format internasional
-  let wa = formObj.waPendaftaran || '085141396865';
+  let wa = formObj.waPendaftaran || '6285141396865';
   wa = wa.replace(/^0/, '62'); // ganti 0 di depan jadi 62
 
   // Bikin link WA
-  const waLink = `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`;
+  const waLink = `https://wa.me/6285141396865{wa}?text=${encodeURIComponent(msg)}`;
   window.open(waLink, '_blank');
 });
