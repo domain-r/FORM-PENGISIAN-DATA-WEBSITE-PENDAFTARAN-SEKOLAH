@@ -147,7 +147,7 @@ form.addEventListener('submit',function(e){
   let msg='Data Pendaftaran Sekolah:\n\n';
   for(let [key,value] of data.entries()){ msg+=`${key}: ${value}\n`; }
   const wa=form.waPendaftaran.value||'6285141396865';
-  const waLink=`https://wa.me/6285141396865{wa}?text=${encodeURIComponent(msg)}`;
+  const waLink=`https://wa.me/6285141396865?text=${encodeURIComponent(msg)}`;
   window.open(waLink,'_blank');
 });
 </script>
