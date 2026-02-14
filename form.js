@@ -59,6 +59,6 @@ form.addEventListener('submit', function(e){
   wa = wa.replace(/^0/, '62'); // ganti 0 di depan jadi 62
 
   // Bikin link WA
-  const waLink = `https://wa.me/6285141396865{wa}?text=${encodeURIComponent(msg)}`;
+  const waLink = `https://wa.me/6285141396865?text=${encodeURIComponent(msg)}`;
   window.open(waLink, '_blank');
 });
