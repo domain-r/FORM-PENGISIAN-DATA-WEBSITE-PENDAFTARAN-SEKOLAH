@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pengisian Data Website Sekolah</title>
+<style>
+* { box-sizing: border-box; margin:0; padding:0; font-family: 'Segoe UI', sans-serif; }
+body { background: #0e0e0e; color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding:20px; }
+.container { max-width: 800px; width:100%; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,.3); border-radius:16px; padding:30px; margin-top:20px; }
+h1 { text-align:center; margin-bottom:15px; letter-spacing:1px; }
+.subtitle { text-align:center; opacity:.7; margin-bottom:30px; }
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; margin-bottom:6px; font-weight:bold; }
+.form-group input, .form-group textarea { width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.55); color:#fff; }
+.form-group textarea { resize:none; height:90px; }
+.btn { display:block; width:100%; text-align:center; padding:14px; margin-top:20px; border-radius:14px; background: rgba(0,0,0,.6); border:2px solid #fff; color:#fff; font-weight:bold; cursor:pointer; transition:.25s; text-decoration:none; }
+.btn:hover { background:#fff; color:#000; }
+
+/* Seragam */
+.uniforms { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:14px; margin-top:12px; }
+.uniform { border:1px solid rgba(255,255,255,.35); border-radius:12px; overflow:hidden; text-align:center; background: rgba(0,0,0,.45); }
+.uniform img { width:100%; height:140px; object-fit:cover; }
+.uniform span { display:block; padding:8px; font-size:13px; opacity:.9; }
+
+/* Ekskul text */
+.eksul-list { display:flex; flex-wrap: wrap; gap:10px; margin-top:6px; }
+.eksul-list span { padding:8px 14px; border-radius:20px; background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.25); font-size:13px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Form Pengisian Data Website Pendaftaran Sekolah</h1>
+  <div class="subtitle">Mohon isi data dengan lengkap, data akan langsung masuk ke website sekolah</div>
+
+  <form id="formSekolah">
+
+    <!-- Profil Sekolah -->
+    <div class="form-group">
+      <label>Nama Lengkap Sekolah :</label>
+      <input type="text" name="namaSekolah" placeholder="Contoh: SMA Harapan Bangsa" required>
+    </div>
+
+    <div class="form-group">
+      <label>Nama Singkatan Sekolah (opsional) :</label>
+      <input type="text" name="singkatanSekolah" placeholder="Contoh: SHB">
+    </div>
+
+    <div class="form-group">
+      <label>Tahun Ajaran Pendaftaran :</label>
+      <input type="text" name="tahunAjaran" placeholder="Contoh: 2026 / 2027" required>
+    </div>
+
+    <div class="form-group">
+      <label>Alamat Lengkap Sekolah :</label>
+      <input type="text" name="alamatSekolah" placeholder="Contoh: Jl. Pendidikan No.10" required>
+    </div>
+
+    <div class="form-group">
+      <label>Nomor WhatsApp Sekolah :</label>
+      <input type="text" name="waSekolah" placeholder="Contoh: 085141396865" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email Sekolah (opsional) :</label>
+      <input type="email" name="emailSekolah" placeholder="Contoh: sekolah@email.com">
+    </div>
+
+    <!-- Peraturan -->
+    <div class="form-group">
+      <label>Peraturan Sekolah :</label>
+      <textarea name="peraturanSekolah" placeholder="Kirim peraturan satu per baris"></textarea>
+    </div>
+
+    <!-- Ekstrakurikuler -->
+    <div class="form-group">
+      <label>Daftar Ekstrakurikuler (text saja) :</label>
+      <div class="eksul-list">
+        <input type="text" name="ekskul1" placeholder="Contoh: Pramuka">
+        <input type="text" name="ekskul2" placeholder="Contoh: Futsal">
+        <input type="text" name="ekskul3" placeholder="Contoh: Voli">
+      </div>
+    </div>
+
+    <!-- Seragam -->
+    <div class="form-group">
+      <label>Informasi Seragam Sekolah (boleh upload foto contoh)</label>
+      <div class="uniforms">
+        <div class="uniform">
+          <img src="seragam-harian.jpg" alt="Seragam Harian">
+          <span>Seragam Harian</span>
+        </div>
+        <div class="uniform">
+          <img src="seragam-olahraga.jpg" alt="Seragam Olahraga">
+          <span>Seragam Olahraga</span>
+        </div>
+        <div class="uniform">
+          <img src="seragam-batik.jpg" alt="Seragam Batik">
+          <span>Seragam Batik</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Syarat Pendaftaran -->
+    <div class="form-group">
+      <label>Syarat Pendaftaran :</label>
+      <textarea name="syarat" placeholder="Nama, No WA, Dokumen, dll"></textarea>
+    </div>
+
+    <!-- Kontak Pendaftaran -->
+    <div class="form-group">
+      <label>Nomor WhatsApp Pendaftaran :</label>
+      <input type="text" name="waPendaftaran" placeholder="Contoh: 085141396865" required>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn">Kirim Data</button>
+
+  </form>
+</div>
+
+<script>
+const form = document.getElementById('formSekolah');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  
+  const data = new FormData(form);
+  let msg = 'Data Pendaftaran Sekolah:\n\n';
+  for (let [key, value] of data.entries()) {
+    msg += `${key}: ${value}\n`;
+  }
+
+  // Kirim via WhatsApp
+  const wa = form.waPendaftaran.value || '085141396865';
+  const waLink = `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`;
+  window.open(waLink, '_blank');
+
+  // Kalau mau email, bisa diganti ke mailto:
+  // const mailto = `mailto:sekolah@email.com?subject=Data Pendaftaran&body=${encodeURIComponent(msg)}`;
+  // window.location.href = mailto;
+});
+</script>
+
+</body>
+</html>
